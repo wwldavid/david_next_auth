@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+--
 
-## Getting Started
+1.  npx create-next-app@latest david_next_auth
+2.  vercel
+    storage --> create database --> neon(serverless postgres) --> continue -->
+    database name: david_auth_database
+3.  git
+    git remote add origin https://github.com/wwldavid/david_next_auth.git
+    git push -u origin main
+4.  vercel
+    overview --> add new project --> david_next_auth import --> deploy
+    connect project (david_auth_database to david_next_auth)
+5.  pnpm i -g vercel
+    vercel link
+6.  vercel env pull .env.development.local
+7.  pnpm add bcryptjs next-auth
+    （import bcrypt from "bcryptjs"）
 
-First, run the development server:
+--
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+8. login and register
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+--
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+9.  vercel
+    storage --> data --> query -->
+    CREATE TABLE users(
+    id SERIAL PRIMARY key,
+    email TEXT NOT null,
+    password TEXT NOT null
+    );
+    ALTER TABLE users
+    ADD constraint unique_email UNIQUE (email);
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-- 10. pnpm install @neondatabase/serverless
 
-## Learn More
+-- login
 
-To learn more about Next.js, take a look at the following resources:
+at the end of .env.development.local
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="----"
+openssl rand -base64 32
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-- middleware
