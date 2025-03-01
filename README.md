@@ -42,3 +42,12 @@ NEXTAUTH_SECRET="----"
 openssl rand -base64 32
 
 -- middleware
+
+-- Vercel
+Vercel --> david_next_auth --> Settings --> Environment Variables --> add :
+Key: NEXTAUTH_URL
+Value: https://david-next-auth.vercel.app/
+Key: NEXTAUTH_SECRET
+Value: ----
+
+--
