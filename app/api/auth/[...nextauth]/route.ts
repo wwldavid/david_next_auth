@@ -18,7 +18,7 @@ const handler = NextAuth({
       email: {},
       password: {},
     },
-    async authorize(credentials, req) {
+    async authorize(credentials) {
       console.log("🟡 正在验证用户:", credentials?.email);
       //
       if (!credentials?.email || !credentials?.password) {
